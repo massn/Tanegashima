@@ -4,7 +4,7 @@ Elixir wrapper for [Pushbullet](https://www.pushbullet.com/).
 
 ## Installation
 
-[Available in Hex](https://hex.pm/docs/publish).
+[Available in Hex](https://hex.pm).
 
 The package can be installed as:
 
