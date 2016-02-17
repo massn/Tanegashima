@@ -17,7 +17,8 @@ defmodule Tanegashima.Push do
   """
   @spec get :: {:ok, Tanegashima.t} | {:error, term}
   def get do
-    with {:ok, %{status_code: status_code, body: body}} <- HTTPoison.get(@push_api, [{"Access-Token", push_bullet_token}]),
+    with {:ok, %{status_code: status_code, body: body}}
+             <- HTTPoison.get(@push_api, [{"Access-Token", Tanegashima.access_token}]),
          {:error, [status_code: 200]} <- {:error, [status_code: status_code]},
          {:ok, poison_struct} <- Poison.decode(body, as: %{}),
          do: Tanegashima.to_struct Tanegashima, poison_struct
@@ -28,7 +29,8 @@ defmodule Tanegashima.Push do
   """
   @spec delete_all :: :ok | {:error, term}
   def delete_all do
-   with {:ok, %{status_code: status_code, body: response}} <- HTTPoison.delete(@push_api, [{"Access-Token", push_bullet_token}]),
+   with {:ok, %{status_code: status_code, body: response}}
+            <- HTTPoison.delete(@push_api, [{"Access-Token", Tanegashima.access_token}]),
         {:error, [status_code: 200]} <- {:error, [status_code: status_code]},
         {:error, [response: "{}"]} <- {:error, [response: response]},
         do: :ok
@@ -40,20 +42,15 @@ defmodule Tanegashima.Push do
   @spec post(parameters) :: {:ok, Tanegashima.t} | {:error, term}
   def post parameters \\ [] do
      with {:ok, body} <- Poison.encode(to_map parameters),
-          {:ok, %{status_code: status_code, body: response}} <- HTTPoison.post(@push_api, body, [{"Access-Token", push_bullet_token},
-                                                                                                {"Content-Type", "application/json"}]),
+          {:ok, %{status_code: status_code, body: response}}
+              <- HTTPoison.post(@push_api, body, [{"Access-Token", Tanegashima.access_token},
+                                                  {"Content-Type", "application/json"}]),
           {:error, [status_code: 200]} <- {:error, [status_code: status_code]},
           {:ok, poison_struct} <- Poison.decode(response, as: %{}),
           do: Tanegashima.to_struct Tanegashima.Push, poison_struct
   end
 
-  ## TODO use protocol
-  defp push_bullet_token do
-    conf = Mix.Config.read!("config/config.exs")
-    conf[:tanegashima][:push_bullet_token]
-  end
-
-  defp to_map parameters do
+   defp to_map parameters do
     Enum.reduce(parameters,
                 %{"body" => "bang!", "title" => "Alert", "type" => "note"},
                 fn({key, val}, acc) -> Map.put(acc, :erlang.atom_to_binary(key, :utf8), val) end)
