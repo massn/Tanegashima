@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.3">
-    <title>Tanegashima.Push – Tanegashima v0.0.1</title>
+    <title>Tanegashima – Tanegashima v0.0.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -60,14 +60,14 @@
 
       <h1>
         <small class="visible-xs">Tanegashima v0.0.1</small>
-        Tanegashima.Push
+        Tanegashima
         
         
       </h1>
 
       
         <section id="moduledoc" class="docstring">
-          <p>Elixir wrapper for Pushbullet-Push-API.</p>
+          <p>Pushbullet general objects.</p>
 
         </section>
       
@@ -81,19 +81,6 @@
             Summary
           </h1>
           
-  <div class="summary-types summary">
-    <h2>
-      <a href="#types">Types</a>
-    </h2>
-    <div class="summary-row">
-  <div class="summary-signature">
-    <a href="#t:parameters/0">parameters()</a>
-  </div>
-  
-</div>
-
-  </div>
-
 
           
   <div class="summary-functions summary">
@@ -102,28 +89,10 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#delete_all/0">delete_all()</a>
+    <a href="#to_struct/2">to_struct(object_module, poison_struct)</a>
   </div>
   
-    <div class="summary-synopsis"><p>delete all pushes</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#get/0">get()</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>get pushes</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#post/1">post(parameters \\ [])</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>post push</p>
+    <div class="summary-synopsis"><p>Convert Poison struct to Tanegashima(Pushbullet object) struct</p>
 </div>
   
 </div>
@@ -138,22 +107,6 @@
         </section>
       
 
-      
-        <section id="types" class="types details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#types">
-              <i class="icon-link"></i>
-            </a>
-            Types
-          </h1>
-          <div class="types-list">
-            <div id="t:parameters/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:parameters/0">parameters</a> :: [{:type | :title | :body | :url | :file_name | :file_type | :file_url, binary}]</code></pre>
-  
-</div>
-
-          </div>
-        </section>
       
 
       
@@ -164,12 +117,12 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="delete_all/0">
+          <div class="detail" id="to_struct/2">
   <div class="detail-header">
-    <a href="#delete_all/0" class="detail-link" title="Link to this function">
+    <a href="#to_struct/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">delete_all()</span>
+    <span class="signature">to_struct(object_module, poison_struct)</span>
       
   </div>
   
@@ -177,61 +130,15 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_all :: :ok | {:error, term}</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>delete all pushes.</p>
-
-  </section>
-</div>
-<div class="detail" id="get/0">
-  <div class="detail-header">
-    <a href="#get/0" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">get()</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">get :: {:ok, <a href="Tanegashima.html#t:t/0">Tanegashima.t</a>} | {:error, term}</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>get pushes.</p>
-
-  </section>
-</div>
-<div class="detail" id="post/1">
-  <div class="detail-header">
-    <a href="#post/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">post(parameters \\ [])</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">post(<a href="#t:parameters/0">parameters</a>) ::
-  {:ok, <a href="Tanegashima.html#t:t/0">Tanegashima.t</a>} |
+          <pre><code class="elixir">to_struct(module, Poison.Parser.t) ::
+  {:ok, %Tanegashima{accounts: term, blocks: term, channels: term, chats: term, clients: term, contacts: term, cursor: term, devices: term, grants: term, profiles: term, pushes: term, subscriptions: term, texts: term}} |
   {:error, term}</code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>post push.</p>
+    <p>Convert Poison struct to Tanegashima(Pushbullet object) struct.</p>
 
   </section>
 </div>
