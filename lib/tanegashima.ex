@@ -6,10 +6,12 @@ defmodule Tanegashima do
             contacts: nil, devices: nil, grants: nil, profiles: nil, pushes: nil,
             subscriptions: nil, texts: nil, cursor: nil
 
+  @type t :: %__MODULE__{}
+
   @doc"""
   Convert Poison struct to Tanegashima(Pushbullet object) struct.
   """
-  @spec to_struct(module, Poison.Parser.t) :: {:ok, %Tanegashima{}} | {:error, term}
+  @spec to_struct(module, Poison.Parser.t) :: {:ok, t} | {:error, term}
   def to_struct object_module, poison_struct do
     object_map = Map.from_struct object_module
     binary_struct_keys = for atom_key <- Map.keys(object_map),
