@@ -7,7 +7,7 @@ defmodule Tanegashima.Push do
             modified: nil, receiver_email: nil, receiver_email_normalized: nil,
             receiver_iden: nil, sender_email: nil, sender_email_normalized: nil,
             sender_iden: nil, sender_name: nil, title: nil, type: nil
-
+  @type t :: %__MODULE__{}
   @type parameters :: [{:type|:title|:body|:url|:file_name|:file_type|:file_url , binary}]
 
   @push_api "https://api.pushbullet.com/v2/pushes"
@@ -39,7 +39,7 @@ defmodule Tanegashima.Push do
   @doc"""
   post push.
   """
-  @spec post(parameters) :: {:ok, Tanegashima.t} | {:error, term}
+  @spec post(parameters) :: {:ok, t} | {:error, term}
   def post parameters \\ [] do
      with {:ok, body} <- Poison.encode(to_map parameters),
           {:ok, %{status_code: status_code, body: response}}
@@ -50,10 +50,10 @@ defmodule Tanegashima.Push do
           do: Tanegashima.to_struct Tanegashima.Push, poison_struct
   end
 
-   defp to_map parameters do
+  defp to_map parameters do
     Enum.reduce(parameters,
-                %{"body" => "bang!", "title" => "Alert", "type" => "note"},
-                fn({key, val}, acc) -> Map.put(acc, :erlang.atom_to_binary(key, :utf8), val) end)
+    %{"body" => "bang!", "title" => "Alert", "type" => "note"},
+    fn({key, val}, acc) -> Map.put(acc, :erlang.atom_to_binary(key, :utf8), val) end)
   end
 
 end
