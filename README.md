@@ -21,6 +21,13 @@ The package can be installed as:
 config :tanegashima,
     access_token: "abc.defg123456789"
 ```
+1.
+In `mix.exs` in your project,
+```elixir
+def application do
+     [applications: [:tanegashima]]
+end
+```
 1.  You can use pushbullet-API. Like ...
 ```bash
 iex> Tanegashima.Push.post body: "hello from Tanegashima!"
