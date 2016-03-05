@@ -15,13 +15,21 @@ defmodule Tanegashima.Push do
   @doc"""
   get pushes.
   """
-  @spec get :: {:ok, Tanegashima.t} | {:error, term}
+  @spec get :: {:ok, [Tanegashima.Push.t]} | {:error, term}
   def get do
     with {:ok, %{status_code: status_code, body: response}}
              <- HTTPoison.get(@push_api, [{"Access-Token", Tanegashima.access_token}]),
-         {:error, [status_code: 200, response: resoponse]} <- {:error, [status_code: status_code, response: response]},
+         {:error, [status_code: 200, response: ^response]}
+             <- {:error, [status_code: status_code, response: response]},
          {:ok, poison_struct} <- Poison.decode(response, as: %{}),
-         do: Tanegashima.to_struct Tanegashima, poison_struct
+         {:ok, %{pushes: pushes}} = Tanegashima.to_struct(Tanegashima, poison_struct)
+         do
+           push_structs = for push <- pushes do
+                            {:ok, push_struct} = Tanegashima.to_struct Tanegashima.Push, push
+                            push_struct
+                          end
+           {:ok, push_structs}
+         end
   end
 
   @doc"""
@@ -45,7 +53,7 @@ defmodule Tanegashima.Push do
           {:ok, %{status_code: status_code, body: response}}
               <- HTTPoison.post(@push_api, body, [{"Access-Token", Tanegashima.access_token},
                                                   {"Content-Type", "application/json"}]),
-          {:error, [status_code: 200]} <- {:error, [status_code: status_code]},
+          {:error, [status_code: 200, response: ^response]} <- {:error, [status_code: status_code, response: response]},
           {:ok, poison_struct} <- Poison.decode(response, as: %{}),
           do: Tanegashima.to_struct Tanegashima.Push, poison_struct
   end
