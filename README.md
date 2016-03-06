@@ -11,7 +11,7 @@ The package can be installed as:
   * Add tanegashima to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:tanegashima, "~> 0.0.3"}]
+          [{:tanegashima, "~> 0.0.5"}]
         end
 
 ## Usage
