@@ -2,9 +2,8 @@ defmodule Tanegashima do
   @moduledoc"""
   Pushbullet general objects.
   """
-  defstruct accounts: nil, blocks: nil, channels: nil, chats: nil, clients: nil,
-            contacts: nil, devices: nil, grants: nil, profiles: nil, pushes: nil,
-            subscriptions: nil, texts: nil, cursor: nil
+  defstruct [:accounts, :blocks, :channels, :chats, :clients, :contacts, :devices, :grants,
+             :profiles, :pushes, :subscriptions, :texts, :cursor]
 
   @type t :: %__MODULE__{}
 

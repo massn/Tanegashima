@@ -3,14 +3,11 @@ defmodule Tanegashima.Push do
   Elixir wrapper for Pushbullet-Push-API.
   """
 
-  defstruct active: nil, awake_app_guids: nil, body: nil, channel_iden: nil,
-            client_iden: nil, created: nil, direction: nil, dismissed: nil,
-            file_name: nil, file_type: nil, file_url: nil, guid: nil,
-            iden: nil, image_height: nil, image_url: nil, image_width: nil,
-            modified: nil, receiver_email: nil, receiver_email_normalized: nil,
-            receiver_iden: nil, sender_email: nil, sender_email_normalized: nil,
-            sender_iden: nil, sender_name: nil, source_device_iden: nil,
-            target_device_iden: nil, title: nil, type: nil, url: nil
+  defstruct [:active, :awake_app_guids, :body, :channel_iden, :client_iden, :created, :direction,
+             :dismissed, :file_name, :file_type, :file_url, :guid, :iden, :image_height, :image_url,
+             :image_width, :modified, :receiver_email, :receiver_email_normalized, :receiver_iden,
+             :sender_email, :sender_email_normalized, :sender_iden, :sender_name, :source_device_iden,
+             :target_device_iden, :title, :type, :url]
 
   @type t :: %__MODULE__{}
   @type parameters :: [{:type|:title|:body|:url|:file_name|:file_type|:file_url , binary}]
