@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Tanegashima – Tanegashima v0.0.7</title>
+    <title>Tanegashima.User – Tanegashima v0.0.7</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -60,14 +60,14 @@
 
       <h1>
         <small class="visible-xs">Tanegashima v0.0.7</small>
-        Tanegashima
+        Tanegashima.User
         
         
       </h1>
 
       
         <section id="moduledoc" class="docstring">
-          <p>Pushbullet general objects.</p>
+          <p>Elixir wrapper for Pushbullet-User-API.</p>
 
         </section>
       
@@ -102,19 +102,10 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#access_token/0">access_token()</a>
+    <a href="#get/0">get()</a>
   </div>
   
-    <div class="summary-synopsis"><p>Get Pushbullet access token</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#to_struct/2">to_struct(object_module, poison_struct)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Convert Poison struct to Tanegashima(Pushbullet object) struct</p>
+    <div class="summary-synopsis"><p>get your user info</p>
 </div>
   
 </div>
@@ -139,7 +130,7 @@
           </h1>
           <div class="types-list">
             <div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %Tanegashima{accounts: term, blocks: term, channels: term, chats: term, clients: term, contacts: term, cursor: term, devices: term, grants: term, profiles: term, pushes: term, subscriptions: term, texts: term}</code></pre>
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %Tanegashima.User{active: term, created: term, email: term, email_normalized: term, iden: term, image_url: term, max_upload_size: term, modified: term, name: term, referred_count: term, referrer_iden: term}</code></pre>
   
 </div>
 
@@ -155,12 +146,12 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="access_token/0">
+          <div class="detail" id="get/0">
   <div class="detail-header">
-    <a href="#access_token/0" class="detail-link" title="Link to this function">
+    <a href="#get/0" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">access_token()</span>
+    <span class="signature">get()</span>
       
   </div>
   
@@ -168,38 +159,13 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">access_token :: binary</code></pre>
+          <pre><code class="elixir">get :: {:ok, <a href="Tanegashima.User.html#t:t/0">Tanegashima.User.t</a>} | {:error, term}</code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Get Pushbullet access token.</p>
-
-  </section>
-</div>
-<div class="detail" id="to_struct/2">
-  <div class="detail-header">
-    <a href="#to_struct/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">to_struct(object_module, poison_struct)</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">to_struct(module, Poison.Parser.t) ::
-  {:ok, <a href="#t:t/0">t</a>} |
-  {:error, term}</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>Convert Poison struct to Tanegashima(Pushbullet object) struct.</p>
+    <p>get your user info.</p>
 
   </section>
 </div>

@@ -11,7 +11,7 @@ defmodule Tanegashima.User do
   @user_api "https://api.pushbullet.com/v2/users/me"
 
   @doc"""
-  get the user of me.
+  get your user info.
   """
   @spec get :: {:ok, Tanegashima.User.t} | {:error, term}
   def get do
@@ -20,8 +20,7 @@ defmodule Tanegashima.User do
          {:error, [status_code: 200, response: ^response]}
              <- {:error, [status_code: status_code, response: response]},
          {:ok, poison_struct} <- Poison.decode(response, as: %{}),
-         {:ok, user_struct} <- Tanegashima.to_struct(Tanegashima.User, poison_struct),
-         do: {:ok, user_struct}
+         do: Tanegashima.to_struct(Tanegashima.User, poison_struct)
   end
 
 end
