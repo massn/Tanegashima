@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Tanegashima.Push – Tanegashima v0.0.8</title>
+    <title>Tanegashima.Device – Tanegashima v0.0.8</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -60,14 +60,14 @@
 
       <h1>
         <small class="visible-xs">Tanegashima v0.0.8</small>
-        Tanegashima.Push
+        Tanegashima.Device
         
         
       </h1>
 
       
         <section id="moduledoc" class="docstring">
-          <p>Elixir wrapper for Pushbullet-Push-API.</p>
+          <p>Elixir wrapper for Pushbullet-Device-API.</p>
 
         </section>
       
@@ -87,12 +87,6 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#t:parameters/0">parameters()</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#t:t/0">t()</a>
   </div>
   
@@ -108,37 +102,10 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#delete/1">delete(iden)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>delete a push by iden</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#delete_all/0">delete_all()</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>delete all pushes</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#get/0">get()</a>
   </div>
   
-    <div class="summary-synopsis"><p>get pushes</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#post/1">post(parameters \\ [])</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>post push</p>
+    <div class="summary-synopsis"><p>get devices</p>
 </div>
   
 </div>
@@ -162,12 +129,8 @@
             Types
           </h1>
           <div class="types-list">
-            <div id="t:parameters/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:parameters/0">parameters</a> :: [{:type | :title | :body | :url | :file_name | :file_type | :file_url, binary}]</code></pre>
-  
-</div>
-<div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %Tanegashima.Push{active: term, awake_app_guids: term, body: term, channel_iden: term, client_iden: term, created: term, direction: term, dismissed: term, file_name: term, file_type: term, file_url: term, guid: term, iden: term, image_height: term, image_url: term, image_width: term, modified: term, receiver_email: term, receiver_email_normalized: term, receiver_iden: term, sender_email: term, sender_email_normalized: term, sender_iden: term, sender_name: term, source_device_iden: term, target_device_iden: term, title: term, type: term, url: term}</code></pre>
+            <div id="t:t/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %Tanegashima.Device{active: term, app_version: term, created: term, fingerprint: term, generated_nickname: term, has_mms: term, has_sms: term, icon: term, iden: term, key_fingerprint: term, kind: term, manufacturer: term, model: term, modified: term, nickname: term, push_token: term, pushable: term, remote_filed: term, type: term}</code></pre>
   
 </div>
 
@@ -183,53 +146,7 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="delete/1">
-  <div class="detail-header">
-    <a href="#delete/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">delete(iden)</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">delete(binary) :: :ok | {:error, term}</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>delete a push by iden.</p>
-
-  </section>
-</div>
-<div class="detail" id="delete_all/0">
-  <div class="detail-header">
-    <a href="#delete_all/0" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">delete_all()</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">delete_all :: :ok | {:error, term}</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>delete all pushes.</p>
-
-  </section>
-</div>
-<div class="detail" id="get/0">
+          <div class="detail" id="get/0">
   <div class="detail-header">
     <a href="#get/0" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -242,36 +159,13 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get :: {:ok, [<a href="Tanegashima.Push.html#t:t/0">Tanegashima.Push.t</a>]} | {:error, term}</code></pre>
+          <pre><code class="elixir">get :: {:ok, [<a href="Tanegashima.Device.html#t:t/0">Tanegashima.Device.t</a>]} | {:error, term}</code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>get pushes.</p>
-
-  </section>
-</div>
-<div class="detail" id="post/1">
-  <div class="detail-header">
-    <a href="#post/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">post(parameters \\ [])</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">post(<a href="#t:parameters/0">parameters</a>) :: {:ok, <a href="#t:t/0">t</a>} | {:error, term}</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>post push.</p>
+    <p>get devices.</p>
 
   </section>
 </div>
