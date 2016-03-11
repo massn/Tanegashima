@@ -5,7 +5,7 @@ defmodule Tanegashima.Device do
 
   defstruct [:active, :app_version, :created, :fingerprint, :generated_nickname, :has_mms,
              :has_sms, :icon, :iden, :key_fingerprint, :kind, :manufacturer, :model,
-             :modified, :nickname, :pushable, :push_token, :remote_filed, :type]
+             :modified, :nickname, :pushable, :push_token, :remote_files, :type]
 
   @type t :: %__MODULE__{}
 
@@ -23,11 +23,13 @@ defmodule Tanegashima.Device do
          {:ok, poison_struct} <- Poison.decode(response, as: %{}),
          {:ok, %{devices: devices}} <- Tanegashima.to_struct(Tanegashima, poison_struct)
          do
+           device_structs =
            for device <- devices
              do
                {:ok, device_struct} = Tanegashima.to_struct(Tanegashima.Device, device)
                device_struct
              end
+           {:ok, device_structs}
          end
   end
 
