@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Tanegashima – Tanegashima v0.0.10</title>
+    <title>Tanegashima.Websocket – Tanegashima v0.0.10</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -60,14 +60,23 @@
 
       <h1>
         <small class="visible-xs">Tanegashima v0.0.10</small>
-        Tanegashima
+        Tanegashima.Websocket
+        
+          <small>behaviour</small>
         
         
       </h1>
 
       
         <section id="moduledoc" class="docstring">
-          <p>Pushbullet general objects.</p>
+          <p>Elixir wrapper for Pushbullet-Websocket-API.
+You can do nothing other than override-defining <code class="inline">handle_push</code> and <code class="inline">handle_other_message</code> for nomal use.
+usage:</p>
+<pre><code class="elixir">defmodule Examaple do
+  use Tanegashima.Websocket
+end</code></pre>
+<p>and</p>
+<pre><code class="iex elixir">iex&gt; Example.start</code></pre>
 
         </section>
       
@@ -87,7 +96,7 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#t:t/0">t()</a>
+    <a href="#t:state/0">state()</a>
   </div>
   
 </div>
@@ -96,35 +105,44 @@
 
 
           
-  <div class="summary-functions summary">
+
+          
+
+          
+  <div class="summary-callbacks summary">
     <h2>
-      <a href="#functions">Functions</a>
+      <a href="#callbacks">Callbacks</a>
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#access_token/0">access_token()</a>
+    <a href="#c:handle_other_message/2">handle_other_message(binary, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Get Pushbullet access token</p>
+    <div class="summary-synopsis"><p>Handle your state when you get other than push or nop notification</p>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#to_struct/2">to_struct(object_module, poison_struct)</a>
+    <a href="#c:handle_push/1">handle_push(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Convert Poison struct to Tanegashima(Pushbullet object) struct</p>
+    <div class="summary-synopsis"><p>Handle your state when you get push-tickle notification</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#c:initial_state/0">initial_state()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The initial state of your GenServer</p>
 </div>
   
 </div>
 
   </div>
 
-
-          
-
-          
 
         </section>
       
@@ -138,8 +156,8 @@
             Types
           </h1>
           <div class="types-list">
-            <div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %Tanegashima{accounts: term, blocks: term, channels: term, chats: term, clients: term, contacts: term, cursor: term, devices: term, grants: term, profiles: term, pushes: term, subscriptions: term, texts: term}</code></pre>
+            <div id="t:state/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:state/0">state</a> :: map</code></pre>
   
 </div>
 
@@ -148,19 +166,23 @@
       
 
       
-        <section id="functions" class="details-list">
+
+      
+
+      
+        <section id="callbacks" class="details-list">
           <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
+            <a class="hover-link" href="#callbacks">
               <i class="icon-link"></i>
             </a>
-            Functions
+            Callbacks
           </h1>
-          <div class="detail" id="access_token/0">
+          <div class="detail" id="c:handle_other_message/2">
   <div class="detail-header">
-    <a href="#access_token/0" class="detail-link" title="Link to this function">
+    <a href="#c:handle_other_message/2" class="detail-link" title="Link to this callback">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">access_token()</span>
+    <span class="signature">handle_other_message(binary, state)</span>
       
   </div>
   
@@ -168,22 +190,22 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">access_token :: binary</code></pre>
+          <pre><code class="elixir">handle_other_message(binary, <a href="#t:state/0">state</a>) :: <a href="#t:state/0">state</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Get Pushbullet access token.</p>
+    <p>Handle your state when you get other than push or nop notification.</p>
 
   </section>
 </div>
-<div class="detail" id="to_struct/2">
+<div class="detail" id="c:handle_push/1">
   <div class="detail-header">
-    <a href="#to_struct/2" class="detail-link" title="Link to this function">
+    <a href="#c:handle_push/1" class="detail-link" title="Link to this callback">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">to_struct(object_module, poison_struct)</span>
+    <span class="signature">handle_push(state)</span>
       
   </div>
   
@@ -191,24 +213,41 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">to_struct(module, Poison.Parser.t) ::
-  {:ok, <a href="#t:t/0">t</a>} |
-  {:error, term}</code></pre>
+          <pre><code class="elixir">handle_push(<a href="#t:state/0">state</a>) :: <a href="#t:state/0">state</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Convert Poison struct to Tanegashima(Pushbullet object) struct.</p>
+    <p>Handle your state when you get push-tickle notification.</p>
+
+  </section>
+</div>
+<div class="detail" id="c:initial_state/0">
+  <div class="detail-header">
+    <a href="#c:initial_state/0" class="detail-link" title="Link to this callback">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">initial_state()</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">initial_state :: <a href="#t:state/0">state</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>The initial state of your GenServer.</p>
 
   </section>
 </div>
 
         </section>
-      
-
-      
-
       
         <footer class="footer">
       <p>

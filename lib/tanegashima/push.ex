@@ -10,26 +10,27 @@ defmodule Tanegashima.Push do
              :target_device_iden, :title, :type, :url]
 
   @type t :: %__MODULE__{}
-  @type parameters :: [{:type|:title|:body|:url|:file_name|:file_type|:file_url , binary}]
+  @type get_parameters :: [{:modified_after|:active|:cursor|:limit, binary}]
+  @type post_parameters :: [{:type|:title|:body|:url|:file_name|:file_type|:file_url , binary}]
 
   @push_api "https://api.pushbullet.com/v2/pushes"
 
   @doc"""
   get pushes.
   """
-  @spec get :: {:ok, [Tanegashima.Push.t]} | {:error, term}
-  def get do
+  @spec get(get_parameters) :: {:ok, [Tanegashima.Push.t]} | {:error, term}
+  def get(parameters \\ [])do
     with {:ok, %{status_code: status_code, body: response}}
-             <- HTTPoison.get(@push_api, [{"Access-Token", Tanegashima.access_token}]),
+           <- HTTPoison.get("#{@push_api}?#{URI.encode_query(parameters)}", [{"Access-Token", Tanegashima.access_token}]),
          {:error, [status_code: 200, response: ^response]}
-             <- {:error, [status_code: status_code, response: response]},
+           <- {:error, [status_code: status_code, response: response]},
          {:ok, poison_struct} <- Poison.decode(response, as: %{}),
          {:ok, %{pushes: pushes}} = Tanegashima.to_struct(Tanegashima, poison_struct)
          do
            push_structs = for push <- pushes do
-                            {:ok, push_struct} = Tanegashima.to_struct Tanegashima.Push, push
-                            push_struct
-                          end
+             {:ok, push_struct} = Tanegashima.to_struct Tanegashima.Push, push
+             push_struct
+           end
            {:ok, push_structs}
          end
   end
@@ -49,9 +50,9 @@ defmodule Tanegashima.Push do
   @doc"""
   post push.
   """
-  @spec post(parameters) :: {:ok, t} | {:error, term}
+  @spec post(post_parameters) :: {:ok, t} | {:error, term}
   def post parameters \\ [] do
-     with {:ok, body} <- Poison.encode(to_map parameters),
+     with {:ok, body} <- Poison.encode(post_parameters_to_map parameters),
           {:ok, %{status_code: status_code, body: response}}
               <- HTTPoison.post(@push_api, body, [{"Access-Token", Tanegashima.access_token},
                                                   {"Content-Type", "application/json"}]),
@@ -60,7 +61,7 @@ defmodule Tanegashima.Push do
           do: Tanegashima.to_struct Tanegashima.Push, poison_struct
   end
 
-  defp to_map parameters do
+  defp post_parameters_to_map parameters do
     Enum.reduce(parameters,
     %{"body" => "bang!", "title" => "Alert", "type" => "note"},
     fn({key, val}, acc) -> Map.put(acc, :erlang.atom_to_binary(key, :utf8), val) end)
@@ -69,8 +70,8 @@ defmodule Tanegashima.Push do
   defp _delete slash_iden \\ "" do
     with {:ok, %{status_code: status_code, body: response}}
             <- HTTPoison.delete(@push_api <> slash_iden, [{"Access-Token", Tanegashima.access_token}]),
-        {:error, [status_code: 200, response: "{}"]} <- {:error, [status_code: status_code, response: response]},
-        do: :ok
+         {:error, [status_code: 200, response: "{}"]} <- {:error, [status_code: status_code, response: response]},
+         do: :ok
   end
 
 end

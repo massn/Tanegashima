@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Tanegashima.Push – Tanegashima v0.0.9</title>
+    <title>Tanegashima.Push – Tanegashima v0.0.10</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         Tanegashima
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.0.9
+        v0.0.10
       </h2>
     </div>
     
@@ -59,7 +59,7 @@
 
 
       <h1>
-        <small class="visible-xs">Tanegashima v0.0.9</small>
+        <small class="visible-xs">Tanegashima v0.0.10</small>
         Tanegashima.Push
         
         
@@ -87,7 +87,13 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#t:parameters/0">parameters()</a>
+    <a href="#t:get_parameters/0">get_parameters()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:post_parameters/0">post_parameters()</a>
   </div>
   
 </div>
@@ -126,7 +132,7 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#get/0">get()</a>
+    <a href="#get/1">get(parameters \\ [])</a>
   </div>
   
     <div class="summary-synopsis"><p>get pushes</p>
@@ -162,8 +168,12 @@
             Types
           </h1>
           <div class="types-list">
-            <div id="t:parameters/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:parameters/0">parameters</a> :: [{:type | :title | :body | :url | :file_name | :file_type | :file_url, binary}]</code></pre>
+            <div id="t:get_parameters/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:get_parameters/0">get_parameters</a> :: [{:modified_after | :active | :cursor | :limit, binary}]</code></pre>
+  
+</div>
+<div id="t:post_parameters/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:post_parameters/0">post_parameters</a> :: [{:type | :title | :body | :url | :file_name | :file_type | :file_url, binary}]</code></pre>
   
 </div>
 <div id="t:t/0" class="type-detail">
@@ -229,12 +239,12 @@
 
   </section>
 </div>
-<div class="detail" id="get/0">
+<div class="detail" id="get/1">
   <div class="detail-header">
-    <a href="#get/0" class="detail-link" title="Link to this function">
+    <a href="#get/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">get()</span>
+    <span class="signature">get(parameters \\ [])</span>
       
   </div>
   
@@ -242,7 +252,9 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get :: {:ok, [<a href="Tanegashima.Push.html#t:t/0">Tanegashima.Push.t</a>]} | {:error, term}</code></pre>
+          <pre><code class="elixir">get(<a href="#t:get_parameters/0">get_parameters</a>) ::
+  {:ok, [<a href="Tanegashima.Push.html#t:t/0">Tanegashima.Push.t</a>]} |
+  {:error, term}</code></pre>
         
       </div>
     </div>
@@ -265,7 +277,7 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">post(<a href="#t:parameters/0">parameters</a>) :: {:ok, <a href="#t:t/0">t</a>} | {:error, term}</code></pre>
+          <pre><code class="elixir">post(<a href="#t:post_parameters/0">post_parameters</a>) :: {:ok, <a href="#t:t/0">t</a>} | {:error, term}</code></pre>
         
       </div>
     </div>
