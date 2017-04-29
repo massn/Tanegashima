@@ -20,14 +20,12 @@ defmodule Tanegashima.Mixfile do
   end
 
   defp deps do
-    [
-      {:httpoison, "~> 0.8.1"},
-      {:poison, "~> 2.1"},
-      {:gun, "~> 1.0.0-pre.1"},
+    [{:httpoison, "~> 0.11.2"},
+     {:poison, "~> 3.1.0"},
+     {:gun, "~> 1.0.0-pre.2"},
 
-      {:dialyze, "~> 0.2.0"},
-      {:ex_doc, "~> 0.11.4"},
-      {:earmark, ">= 0.0.0"}
-    ]
+     {:dialyze, "~> 0.2.0"},
+     {:ex_doc, "~> 0.11.4"},
+     {:earmark, ">= 0.0.0"}]
   end
 end
