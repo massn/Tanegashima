@@ -12,7 +12,7 @@ defmodule Tanegashima.Mixfile do
        licenses: ["MIT"],
        links: %{"GitHub" => "https://github.com/massn/Tanegashima"}
        ],
-     deps: deps]
+     deps: deps()]
   end
 
   def application do
